@@ -9,6 +9,7 @@ using POS.App.Helpers;
 using POS.Application.Common;
 using POS.Application.Interfaces;
 using POS.Infrastructure.Context;
+using POS.Infrastructure.Interceptors;
 using POS.Infrastructure.Services;
 using System.Text;
 using System.Text.Json;
@@ -20,6 +21,7 @@ namespace POS.Infrastructure
 		public static IServiceCollection AddInfrastructureService(this IServiceCollection services, IConfiguration configuration)
 		{
 			services.Configure<AppSettings>(configuration.GetSection("Config"));
+			services.AddScoped<AuditableEntitySaveChangesInterceptor>();
 
 			services.AddIdentity<IdentityUser, IdentityRole>(options =>
 			{
