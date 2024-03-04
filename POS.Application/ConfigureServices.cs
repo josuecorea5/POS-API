@@ -16,6 +16,7 @@ namespace POS.Application
 				configuration.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
 				configuration.AddBehavior(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
 			});
+			services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
 			return services;
 		}

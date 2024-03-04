@@ -1,6 +1,6 @@
 ﻿namespace POS.Application.Interfaces
 {
-	public interface ICurrentUser
+	public interface ICurrentUserService
 	{
 		public string GetUserId();
 	}

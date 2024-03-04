@@ -7,9 +7,9 @@ namespace POS.Infrastructure.Interceptors
 {
 	public class AuditableEntitySaveChangesInterceptor : SaveChangesInterceptor
 	{
-		private readonly ICurrentUser _currentUser;
+		private readonly ICurrentUserService _currentUser;
 
-		public AuditableEntitySaveChangesInterceptor(ICurrentUser currentUser)
+		public AuditableEntitySaveChangesInterceptor(ICurrentUserService currentUser)
 		{
 			_currentUser = currentUser;
 		}

@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using POS.App;
 using POS.App.Modules.Middleware;
+using POS.App.Modules.Swagger;
 using POS.Application;
 using POS.Infrastructure;
 using POS.Infrastructure.Seeds;
@@ -12,7 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwagger();
 
 //Infrastructure layer
 builder.Services.AddInfrastructureService(builder.Configuration);

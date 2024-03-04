@@ -10,6 +10,7 @@ using POS.Application.Common;
 using POS.Application.Interfaces;
 using POS.Infrastructure.Context;
 using POS.Infrastructure.Interceptors;
+using POS.Infrastructure.Repositories;
 using POS.Infrastructure.Services;
 using System.Text;
 using System.Text.Json;
@@ -21,7 +22,9 @@ namespace POS.Infrastructure
 		public static IServiceCollection AddInfrastructureService(this IServiceCollection services, IConfiguration configuration)
 		{
 			services.Configure<AppSettings>(configuration.GetSection("Config"));
+			services.AddSingleton<ICurrentUserService, CurrentUserService>();
 			services.AddScoped<AuditableEntitySaveChangesInterceptor>();
+			services.AddScoped<SoftDeleteInterceptor>();
 
 			services.AddIdentity<IdentityUser, IdentityRole>(options =>
 			{
@@ -62,6 +65,13 @@ namespace POS.Infrastructure
 						}
 						return context.Response.WriteAsync(context.Exception.ToString());
 					},
+					OnForbidden = context =>
+					{
+						context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+						context.Response.ContentType = "application/json";
+						var result = JsonSerializer.Serialize(new Response<string> { Message = "Unauthorized" });
+						return context.Response.WriteAsync(result);
+					},
 					OnChallenge = context =>
 					{
 						context.HandleResponse();
@@ -87,6 +97,8 @@ namespace POS.Infrastructure
 			});
 
 			services.AddScoped<IAuthService, AuthService>();
+			services.AddScoped<IUnitOfWork, UnitOfWork>();
+			services.AddScoped<IClientRepository, ClientRepository>();
 
 			return services;
 		}

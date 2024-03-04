@@ -6,6 +6,5 @@ namespace POS.Domain.Entities
 	public class Client : BaseAuditableEntity
 	{
 		public string FullName { get; set; }
-		public StatusEnum Status { get; set; }
 	}
 }
