@@ -99,6 +99,7 @@ namespace POS.Infrastructure
 			services.AddScoped<IAuthService, AuthService>();
 			services.AddScoped<IUnitOfWork, UnitOfWork>();
 			services.AddScoped<IClientRepository, ClientRepository>();
+			services.AddScoped<IProductRepository, ProductRepository>();
 
 			return services;
 		}

@@ -8,10 +8,13 @@ namespace POS.Infrastructure.Repositories
 		private readonly POSDbContext _context;
 		public IClientRepository ClientRepository { get; }
 
-		public UnitOfWork(POSDbContext context, IClientRepository clientRepository)
+		public IProductRepository ProductRepository { get; }
+
+		public UnitOfWork(POSDbContext context, IClientRepository clientRepository, IProductRepository productRepository)
 		{
 			_context = context;
 			ClientRepository = clientRepository;
+			ProductRepository = productRepository;
 		}
 
 		public async Task<int> SaveChanges(CancellationToken cancellationToken)
