@@ -29,6 +29,7 @@ namespace POS.Application.UseCases.Products.Queries
 			}
 
 			response.Success = true;
+			response.Message = "Request successfully";
 			response.Data = _mapper.Map<ProductDto>(product);
 			response.Message = "Request successfully";
 

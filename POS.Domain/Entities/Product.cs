@@ -6,5 +6,6 @@ namespace POS.Domain.Entities
 	{
 		public string Name { get; set; }
 		public decimal UnitPrice { get; set; }
+		public virtual ICollection<SaleDetail> SaleDetail { get; set; } = new List<SaleDetail>();
 	}
 }

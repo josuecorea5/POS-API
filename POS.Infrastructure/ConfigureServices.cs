@@ -100,6 +100,8 @@ namespace POS.Infrastructure
 			services.AddScoped<IUnitOfWork, UnitOfWork>();
 			services.AddScoped<IClientRepository, ClientRepository>();
 			services.AddScoped<IProductRepository, ProductRepository>();
+			services.AddScoped<ISaleRepository, SaleRepository>();
+			services.AddScoped<ISaleDetailRepository, SaleDetailRepository>();
 
 			return services;
 		}

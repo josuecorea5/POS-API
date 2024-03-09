@@ -19,11 +19,15 @@ namespace POS.Infrastructure.Context
 
 		public DbSet<Client> Clients { get; set; }
 		public DbSet<Product> Products { get; set; }
+		public DbSet<Sale> Sales { get; set; }
+		public DbSet<SaleDetail> SaleDetail { get; set; }
 
 		protected override void OnModelCreating(ModelBuilder builder)
 		{
 			builder.Entity<Client>().ToTable("Client").HasQueryFilter(x => x.Status == StatusEnum.Active);
 			builder.Entity<Product>().ToTable("Product").HasQueryFilter(x => x.Status == StatusEnum.Active);
+			builder.Entity<Sale>().ToTable("Sale").HasQueryFilter(x => x.Status == StatusEnum.Active);
+			builder.Entity<SaleDetail>().ToTable("SaleDetail").HasQueryFilter(x => x.Status == StatusEnum.Active);
 			builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 			base.OnModelCreating(builder);
 		}
