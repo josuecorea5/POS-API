@@ -8,6 +8,7 @@ namespace POS.Application.Interfaces
 		IProductRepository ProductRepository { get; }
 		ISaleRepository SaleRepository { get; }
 		ISaleDetailRepository SaleDetailRepository { get; }
+		ISchedulePaymentRepository SchedulePaymentRepository { get; }
 		Task<int> SaveChanges(CancellationToken cancellationToken);
 		IDbTransaction BeginTransaction();
 	}

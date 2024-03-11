@@ -9,18 +9,19 @@ namespace POS.Infrastructure.Repositories
 	{
 		private readonly POSDbContext _context;
 		public IClientRepository ClientRepository { get; }
-
 		public IProductRepository ProductRepository { get; }
 		public ISaleRepository SaleRepository { get; }
 		public ISaleDetailRepository SaleDetailRepository { get; }
+		public ISchedulePaymentRepository SchedulePaymentRepository { get; }
 
-		public UnitOfWork(POSDbContext context, IClientRepository clientRepository, IProductRepository productRepository, ISaleRepository saleRepository, ISaleDetailRepository saleDetailRepository)
+		public UnitOfWork(POSDbContext context, IClientRepository clientRepository, IProductRepository productRepository, ISaleRepository saleRepository, ISaleDetailRepository saleDetailRepository, ISchedulePaymentRepository schedulePaymentRepository)
 		{
 			_context = context;
 			ClientRepository = clientRepository;
 			ProductRepository = productRepository;
 			SaleRepository = saleRepository;
 			SaleDetailRepository = saleDetailRepository;
+			SchedulePaymentRepository = schedulePaymentRepository;
 		}
 
 		public async Task<int> SaveChanges(CancellationToken cancellationToken)

@@ -102,6 +102,7 @@ namespace POS.Infrastructure
 			services.AddScoped<IProductRepository, ProductRepository>();
 			services.AddScoped<ISaleRepository, SaleRepository>();
 			services.AddScoped<ISaleDetailRepository, SaleDetailRepository>();
+			services.AddScoped<ISchedulePaymentRepository, SchedulePaymentRespository>();
 
 			return services;
 		}

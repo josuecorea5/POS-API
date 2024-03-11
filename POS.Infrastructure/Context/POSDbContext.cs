@@ -21,6 +21,7 @@ namespace POS.Infrastructure.Context
 		public DbSet<Product> Products { get; set; }
 		public DbSet<Sale> Sales { get; set; }
 		public DbSet<SaleDetail> SaleDetail { get; set; }
+		public DbSet<SchedulePayment> SchedulePayment { get; set; }
 
 		protected override void OnModelCreating(ModelBuilder builder)
 		{
@@ -28,6 +29,7 @@ namespace POS.Infrastructure.Context
 			builder.Entity<Product>().ToTable("Product").HasQueryFilter(x => x.Status == StatusEnum.Active);
 			builder.Entity<Sale>().ToTable("Sale").HasQueryFilter(x => x.Status == StatusEnum.Active);
 			builder.Entity<SaleDetail>().ToTable("SaleDetail").HasQueryFilter(x => x.Status == StatusEnum.Active);
+			builder.Entity<SchedulePayment>().ToTable("SchedulePayment").HasQueryFilter(x => x.Status == StatusEnum.Active);
 			builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 			base.OnModelCreating(builder);
 		}

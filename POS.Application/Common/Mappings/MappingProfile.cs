@@ -3,10 +3,12 @@ using POS.Application.DTOs.Clients;
 using POS.Application.DTOs.Products;
 using POS.Application.DTOs.SaleDetails;
 using POS.Application.DTOs.Sales;
+using POS.Application.DTOs.SchedulePayments;
 using POS.Application.UseCases.Clients.Commands;
 using POS.Application.UseCases.Products.Commands;
 using POS.Application.UseCases.SaleDetails.Commands;
 using POS.Application.UseCases.Sales.Commands;
+using POS.Application.UseCases.SchedulePayments.Commands;
 using POS.Domain.Entities;
 
 namespace POS.Application.Common.Mappings
@@ -28,6 +30,10 @@ namespace POS.Application.Common.Mappings
             CreateMap<UpdateSaleCommand, Sale>();
             CreateMap<UpdateSaleDetailCommand, SaleDetail>();
             CreateMap<DeleteSaleDetailCommand, SaleDetail>();
+            CreateMap<CreateSchedulePaymentCommand, SchedulePayment>();
+            CreateMap<SchedulePayment, SchedulePaymentDto>();
+            CreateMap<UpdateSchedulePaymentCommand, SchedulePayment>();
+            CreateMap<UpdateSchedulePaymentStatusCommand, SchedulePayment>();
         }
     }
 }
