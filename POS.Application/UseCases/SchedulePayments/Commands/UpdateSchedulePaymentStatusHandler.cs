@@ -26,6 +26,12 @@ namespace POS.Application.UseCases.SchedulePayments.Commands
 				return response;
 			}
 
+			if(request.SchedulePaymentStatus == SchedulePaymentStatus.OVERDUE && schedulePayment.LimitDate < DateTime.UtcNow)
+			{
+				response.Message = "You cannot mark a scheduled payment as overdue prior the limit date";
+				return response;
+			}
+
 			using var transaction = _unitOfWork.BeginTransaction();
 
 			try

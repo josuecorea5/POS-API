@@ -11,6 +11,7 @@ namespace POS.Domain.Entities
 		public int ClientId { get; set; }
 		public Client Client { get; set; } = null!;
 		public virtual ICollection<SaleDetail> SaleDetails { get; set; } = new List<SaleDetail>();
-		public SchedulePayment SchedulePayment { get; set; } = null!;
+		public virtual ICollection<RechargeSale> RechargeSales { get; set; } = new List<RechargeSale>();
+		public virtual ICollection<SchedulePayment> SchedulePayments { get; set; } = null!;
 	}
 }

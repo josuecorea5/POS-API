@@ -28,7 +28,7 @@ namespace POS.Infrastructure.Configurations
 				.HasDefaultValue(SchedulePaymentStatus.PENDING);
 			builder.Property(sp => sp.Status)
 				.HasDefaultValue(StatusEnum.Active);
-			builder.HasOne(sp => sp.Sale).WithOne(s => s.SchedulePayment).HasForeignKey<SchedulePayment>(sp => sp.SaleId);
+			builder.HasOne(sp => sp.Sale).WithMany(s => s.SchedulePayments).HasForeignKey(sp => sp.SaleId);
 		}
 	}
 }

@@ -1,11 +1,13 @@
 ﻿using AutoMapper;
 using POS.Application.DTOs.Clients;
 using POS.Application.DTOs.Products;
+using POS.Application.DTOs.RechargeSales;
 using POS.Application.DTOs.SaleDetails;
 using POS.Application.DTOs.Sales;
 using POS.Application.DTOs.SchedulePayments;
 using POS.Application.UseCases.Clients.Commands;
 using POS.Application.UseCases.Products.Commands;
+using POS.Application.UseCases.RechargeSales.Command;
 using POS.Application.UseCases.SaleDetails.Commands;
 using POS.Application.UseCases.Sales.Commands;
 using POS.Application.UseCases.SchedulePayments.Commands;
@@ -34,6 +36,11 @@ namespace POS.Application.Common.Mappings
             CreateMap<SchedulePayment, SchedulePaymentDto>();
             CreateMap<UpdateSchedulePaymentCommand, SchedulePayment>();
             CreateMap<UpdateSchedulePaymentStatusCommand, SchedulePayment>();
+            CreateMap<CreateRechargeSaleCommand, RechargeSale>();
+            CreateMap<RechargeSale, RechargeSaleDto>();
+            CreateMap<UpdateRechargeSaleCommand, RechargeSale>();
+            CreateMap<UpdateRechargeSaleStatusCommand, RechargeSale>();
+            CreateMap<CreateNewRechargeSaleCommand, RechargeSale>();
         }
     }
 }

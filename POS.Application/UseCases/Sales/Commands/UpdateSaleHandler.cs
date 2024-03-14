@@ -2,6 +2,7 @@
 using MediatR;
 using POS.Application.Common;
 using POS.Application.Interfaces;
+using POS.Domain.Enums;
 
 namespace POS.Application.UseCases.Sales.Commands
 {
@@ -27,6 +28,17 @@ namespace POS.Application.UseCases.Sales.Commands
 			}
 
 			var sale = await _unitOfWork.SaleRepository.GetById(request.Id);
+
+			if (request.SaleStatus == SaleStatus.CLOSED)
+			{
+				var existSchedulePaymnet = await _unitOfWork.SchedulePaymentRepository.GetSchedulePaymentBySaleId(request.Id);
+
+				if(existSchedulePaymnet != null && existSchedulePaymnet.SchedulePaymentStatus != SchedulePaymentStatus.COMPLETED)
+				{
+					response.Message = "You cannot close a sale with a pending schedule payment";
+					return response;
+				}
+			}
 
 			_mapper.Map(request, sale);
 

@@ -9,6 +9,13 @@ namespace POS.App.Modules.Swagger
 		{
 			services.AddSwaggerGen(c =>
 			{
+				c.SwaggerDoc("v1", new OpenApiInfo
+				{
+					Version = "v1",
+					Title = "Point of Sell API",
+					Description = "This API handles information about Users, Clients, Products, Sales, Detail Sales, Recharge for sales and Schedule payments."
+				});
+
 				c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
 				{
 					Description = "Enter JWT Bearer token",

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using POS.Infrastructure.Context;
 
@@ -11,9 +12,11 @@ using POS.Infrastructure.Context;
 namespace POS.Infrastructure.Migrations
 {
     [DbContext(typeof(POSDbContext))]
-    partial class POSDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240312200114_AddDefaultValueRechargeSale")]
+    partial class AddDefaultValueRechargeSale
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -370,7 +373,7 @@ namespace POS.Infrastructure.Migrations
                     b.Property<DateTime>("DateSale")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2024, 3, 14, 16, 6, 31, 265, DateTimeKind.Utc).AddTicks(8448));
+                        .HasDefaultValue(new DateTime(2024, 3, 12, 20, 1, 13, 133, DateTimeKind.Utc).AddTicks(4355));
 
                     b.Property<DateTime>("LastModified")
                         .HasColumnType("datetime2");
@@ -504,7 +507,8 @@ namespace POS.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("SaleId");
+                    b.HasIndex("SaleId")
+                        .IsUnique();
 
                     b.ToTable("SchedulePayment", (string)null);
                 });
@@ -604,8 +608,8 @@ namespace POS.Infrastructure.Migrations
             modelBuilder.Entity("POS.Domain.Entities.SchedulePayment", b =>
                 {
                     b.HasOne("POS.Domain.Entities.Sale", "Sale")
-                        .WithMany("SchedulePayments")
-                        .HasForeignKey("SaleId")
+                        .WithOne("SchedulePayment")
+                        .HasForeignKey("POS.Domain.Entities.SchedulePayment", "SaleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -628,7 +632,8 @@ namespace POS.Infrastructure.Migrations
 
                     b.Navigation("SaleDetails");
 
-                    b.Navigation("SchedulePayments");
+                    b.Navigation("SchedulePayment")
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
