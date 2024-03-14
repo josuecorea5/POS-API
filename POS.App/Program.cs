@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using POS.App;
+using POS.App.Modules.CorsExtension;
 using POS.App.Modules.Middleware;
 using POS.App.Modules.Swagger;
 using POS.Application;
@@ -15,6 +16,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwagger();
 
+//CORS
+builder.Services.AddCorsExtension(builder.Configuration);
+
 //Infrastructure layer
 builder.Services.AddInfrastructureService(builder.Configuration);
 
@@ -25,6 +29,7 @@ builder.Services.AddApplicationService();
 builder.Services.AddPresentation();
 
 var app = builder.Build();
+var policy = "policyPOS";
 
 using (var scope = app.Services.CreateScope())
 {
@@ -49,6 +54,8 @@ if (app.Environment.IsDevelopment())
 	app.UseSwagger();
 	app.UseSwaggerUI();
 }
+
+app.UseCors(policy);
 
 app.UseHttpsRedirection();
 app.UseAuthentication();
